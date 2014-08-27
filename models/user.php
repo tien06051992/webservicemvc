@@ -1,17 +1,31 @@
 <?php
 	class user extends database {
-		public function __construct() {
+		private $name;
+		private $pass;
+		public function __construct($p_obj) {
 			$this->connect();
+			$this->name=$p_obj->name;
+			$this->pass=$p_obj->pass;
 		}
+/*		public function user($p_name,$p_pass) {
+			$this->name=$p_name;
+			$this->pass=$p_pass;
+		}*/
 		public function login() {
-			$sql='select * from tbl_user';
+			$sql='select * from taikhoans where TenDangNhap="'.$this->name.'" and MatKhau="'.$this->pass.'"';
 			$this->query($sql);
-			$data=$this->fetch_assoc_all();
-			return $data;
+			$data=array();
+			if( $this->num_rows()==1 ){
+				return $data='true';
+			}else{
+				return $data='false';
+			}
+			return $data='false';
 		}
-		public function signup($bien) {
-			// will process valiable
-			return $bien;
+		public function signup() {
+			$data="insert into taikhoans(TenDangNhap,MatKhau,CauHoiBiMat_id) values($this->name,$this->pass,1)";
+			//$sql="insert into taikhoans(TenDangNhap,MatKhau) values($this->name,$this->pass)";
+			return $data;
 		}
 	}
 ?>

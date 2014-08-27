@@ -1,8 +1,11 @@
 <?php
 	require 'models/user.php';
-	$_user=new user;
-	$data=array("error" => "Unauthorized",
-"code" => 1,);
+	$data=$app->request->getBody();
+	$data=json_decode($data);
+	$user=(object) array();
+	$user->name=$data->name;
+	$user->pass=$data->pass;
+	$_user=new user($user);
 	$data=$_user->login();
-	echo json_encode($data);
+	require 'views/user/view_login.php';
 ?>

@@ -23,8 +23,11 @@
     
     //now function get, last function post to check
     //-------USER---------
-    $app->get('/user/signup', function () use ($app) {
+    $app->post('/user/signup', function () use ($app) {
         require 'controllers/user/signup.php';
+    });
+    $app->post('/user/login', function () use ($app) {
+        require 'controllers/user/login.php';
     });
     //-------PRODUCT------------
     $app->get('/product/category', function () use ($app) {
@@ -33,10 +36,10 @@
     $app->get('/product/getProductByCategory', function () use ($app) {
         require 'controllers/product/getProductByCategory.php';
     });
-    $app->get('/product/getProductById', function () use ($app) {
+    $app->post('/product/getProductById', function () use ($app) {
         require 'controllers/product/getProductById.php';
     });
-    $app->delete('/product/detail', function () use ($app) {
+    $app->post('/product/detail', function () use ($app) {
         require 'controllers/product/detail.php';
     });
     $app->run();
